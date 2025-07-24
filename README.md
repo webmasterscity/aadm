@@ -337,12 +337,6 @@ AADM is an open specification. We welcome contributions:
 
 > "The best code is not the one that humans can read, but the one that describes its purpose so clearly that anyone—human or AI—can understand, use, and improve it."
 
-## 📄 License
-
-MIT License - See [LICENSE](LICENSE) for details
-
----
-
 
 
 <p align="center">

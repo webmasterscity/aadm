@@ -332,12 +332,6 @@ AADM is an open specification. We welcome contributions:
 3. **Build Tools**: Create tooling for your favorite language
 4. **Share Results**: Document your migration journey
 
-## 📚 Resources
-
-- [Full Specification](https://github.com/aadm/spec)
-- [Migration Guide](https://github.com/aadm/migration-guide)
-- [Tool Ecosystem](https://github.com/aadm/awesome-aadm)
-- [Case Studies](https://github.com/aadm/case-studies)
 
 ## 💡 Philosophy
 
@@ -349,12 +343,7 @@ MIT License - See [LICENSE](LICENSE) for details
 
 ---
 
-<p align="center">
-  <b>Join the revolution. Build software that builds itself.</b><br>
-  <a href="https://github.com/aadm/spec">Get Started</a> •
-  <a href="https://discord.gg/aadm">Join Community</a> •
-  <a href="https://twitter.com/aadm_arch">Follow Updates</a>
-</p>
+
 
 <p align="center">
   <i>AADM - Where every line of code is a conscious decision, not a necessity.</i>

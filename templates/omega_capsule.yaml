@@ -1,0 +1,25 @@
+# Plantilla de cápsula Ω (rellenar claves marcadas con TODO)
+capsule_id: TODO
+prompt_ref: TODO
+objective: TODO
+status: draft
+scope:
+  nodes: []  # ej: ["atom:email-format-validator", "test:property/email_unicode_fuzz"]
+  contracts: []
+context:
+  packs:
+    - ref: TODO  # atlas://context-packs/<id>
+      granularity: meso
+  invariants: []
+validation_plan:
+  required:
+    - guardian_shield
+    - proof_forge
+    - impact_sentinel
+  optional: []
+rollback_strategy:
+  type: revert
+  target_version: TODO
+  automated: true
+notes: |
+  Describir supuestos, riesgos y límites.

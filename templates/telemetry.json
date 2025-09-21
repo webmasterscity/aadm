@@ -1,0 +1,11 @@
+{
+  "capsule_id": "TODO",
+  "tokens_consumed": 0,
+  "latency_ms_total": 0,
+  "guardian_shield_ms": 0,
+  "proof_forge_ms": 0,
+  "impact_sentinel_ms": 0,
+  "coverage_delta": 0.0,
+  "mutation_kill_rate": 0.0,
+  "energy_estimate_kwh": 0.0
+}

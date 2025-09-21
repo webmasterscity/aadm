@@ -1,0 +1,43 @@
+identity:
+  id: atom-email-validator-py
+  name: email-format-validator
+  version: 2.1.0
+  hash: sha256:<pending>
+intent:
+  prompt_signature: "python email validator rfc5322"
+  requirements:
+    - "Return structure {valid, error}"
+    - "Use deterministic regex"
+  invariants:
+    - label: deterministic
+      description: "Same input -> same output"
+    - label: null_safety
+      description: "Never return null fields"
+contracts:
+  input_schema:
+    type: object
+    properties:
+      email:
+        type: string
+    required: [email]
+  output_schema:
+    type: object
+    properties:
+      valid:
+        type: boolean
+      error:
+        type: string
+        nullable: true
+    required: [valid, error]
+  side_effects: []
+validation:
+  required_tests:
+    - id: unit/test_email_validator.py
+      type: unit
+      command: "pytest -k email_validator"
+  rollback_strategy:
+    type: revert
+    target_version: 2.0.5
+risk_profile:
+  criticality: medium
+  blast_radius: authentication

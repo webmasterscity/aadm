@@ -1,0 +1,166 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://aadm.dev/schemas/intent-spec.json",
+  "title": "IntentSpec",
+  "description": "Esquema formal para describir intención, contratos y validación de átomos AADM",
+  "type": "object",
+  "required": ["identity", "intent", "contracts", "validation"],
+  "properties": {
+    "identity": {
+      "type": "object",
+      "required": ["id", "name", "version", "hash"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{6,}$" },
+        "owner": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "intent": {
+      "type": "object",
+      "required": ["prompt_signature", "requirements"],
+      "properties": {
+        "prompt_signature": { "type": "string" },
+        "source_prompt_ref": { "type": "string" },
+        "requirements": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "constraints": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "invariants": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["label", "description"],
+            "properties": {
+              "label": { "type": "string" },
+              "description": { "type": "string" },
+              "category": { "type": "string", "enum": ["safety", "performance", "semantic", "regulatory"] }
+            }
+          }
+        },
+        "success_metrics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["metric", "target"],
+            "properties": {
+              "metric": { "type": "string" },
+              "target": { "type": "string" },
+              "baseline": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "contracts": {
+      "type": "object",
+      "required": ["input_schema", "output_schema"],
+      "properties": {
+        "input_schema": { "type": "object" },
+        "output_schema": { "type": "object" },
+        "side_effects": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "error_model": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["code", "description"],
+            "properties": {
+              "code": { "type": "string" },
+              "description": { "type": "string" },
+              "recoverable": { "type": "boolean" }
+            }
+          }
+        },
+        "performance_budget": {
+          "type": "object",
+          "properties": {
+            "latency_ms_p99": { "type": "number" },
+            "memory_mb": { "type": "number" },
+            "throughput": { "type": "number" }
+          }
+        }
+      }
+    },
+    "risk_profile": {
+      "type": "object",
+      "properties": {
+        "criticality": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+        "blast_radius": { "type": "string" },
+        "dependencies": {
+          "type": "object",
+          "properties": {
+            "semantic": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "runtime": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "required": ["required_tests", "rollback_strategy"],
+      "properties": {
+        "required_tests": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["id", "type", "command"],
+            "properties": {
+              "id": { "type": "string" },
+              "type": { "type": "string", "enum": ["unit", "integration", "property", "fuzz", "contract", "snapshot"] },
+              "command": { "type": "string" },
+              "coverage_expectation": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          }
+        },
+        "safety_checks": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "rollback_strategy": {
+          "type": "object",
+          "required": ["type"],
+          "properties": {
+            "type": { "type": "string", "enum": ["revert", "feature_flag", "shadow", "canary"] },
+            "target_version": { "type": "string" },
+            "notes": { "type": "string" }
+          }
+        }
+      }
+    },
+    "observability": {
+      "type": "object",
+      "properties": {
+        "metrics": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "logs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "alerts": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}
